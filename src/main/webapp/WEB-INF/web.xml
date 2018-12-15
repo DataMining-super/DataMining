@@ -4,4 +4,14 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+
+  <!--配置上下文-->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>
+      classpath:spring/applicationContext.xml,
+      classpath:spring/applicationContext-
+
+    </param-value>
+  </context-param>
 </web-app>
