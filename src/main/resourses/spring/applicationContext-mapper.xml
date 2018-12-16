@@ -23,7 +23,7 @@
     </bean>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="cn.huang.crm.mapper" />
+        <property name="basePackage" value="com.swpu.mapper" />
     </bean>
 
 </beans>

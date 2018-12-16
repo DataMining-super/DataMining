@@ -17,12 +17,13 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private UserService service;
+    private UserService userService;
+
 
     @RequestMapping(value = "/")
     public String showUserList(Model model){
 
-        List<Users> users = service.showUserList();
+        List<Users> users = userService.showUserList();
 
         model.addAttribute("users",users);
 

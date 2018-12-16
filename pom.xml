@@ -21,6 +21,36 @@
 
   <dependencies>
       <dependency>
+          <groupId>org.apache.taglibs</groupId>
+          <artifactId>taglibs-standard-spec</artifactId>
+          <version>1.2.1</version>
+      </dependency>
+      <dependency>
+          <groupId>org.apache.taglibs</groupId>
+          <artifactId>taglibs-standard-impl</artifactId>
+          <version>1.2.1</version>
+      </dependency>
+      <dependency>
+          <groupId>taglibs</groupId>
+          <artifactId>standard</artifactId>
+          <version>1.1.2</version>
+      </dependency>
+      <dependency>
+          <groupId>javax.servlet</groupId>
+          <artifactId>jstl</artifactId>
+          <version>1.2</version>
+      </dependency>
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-jdbc</artifactId>
+          <version>4.3.11.RELEASE</version>
+      </dependency>
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-tx</artifactId>
+          <version>4.3.18.RELEASE</version>
+      </dependency>
+      <dependency>
           <groupId>jstl</groupId>
           <artifactId>jstl</artifactId>
           <version>1.2</version>
@@ -100,5 +130,15 @@
         </plugin>
       </plugins>
     </pluginManagement>
+      <resources>
+          <resource>
+              <directory>src/main/java</directory><!--所在的目录-->
+              <includes><!--包括目录下的.properties,.xml文件都会扫描到-->
+                  <include>**/*.properties</include>
+                  <include>**/*.xml</include>
+              </includes>
+              <filtering>false</filtering>
+          </resource>
+      </resources>
   </build>
 </project>
