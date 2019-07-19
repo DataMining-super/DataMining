@@ -6,7 +6,7 @@ package com.swpu.enums;
 public enum UserStateEnum {
 
     REGISTER_SUCCESS(0,"注册成功"),ERROR(-1,"注册失败"),LOGIN_SUCCESS(1,"登陆成功"),
-    NULL_INFO(2,"注册信息空值");
+    NULL_INFO(2,"信息空值"),LOGIN_ERROR(3,"登陆失败"),REGISTER_ERROR(4,"用户名存在");
     private int state;
     private String stateInfo;
 

@@ -4,14 +4,26 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!--public List<Users> showUserList();-->
+
 <mapper namespace="com.swpu.mapper.UserDao">
     <select id="showUserList" resultType="Users" >
         select * from tb_users
     </select>
-    <insert id="registerUser" useGeneratedKeys="true" keyProperty="userId" keyColumn="user_id" >
+
+    <!-- 注册用户的信息 -->
+    <insert id="insertByUser" useGeneratedKeys="true" keyProperty="userId" keyColumn="user_id" >
         insert into
         tb_users(user_id,username,password,local_auth,identities)
         values
         (#{userId},#{username},#{password},#{localAuth},#{identities})
     </insert>
+
+    <!-- 用户登陆-->
+    <select id="queryByUsername" resultType="Users">
+        select
+        user_id,username,password,local_auth,identities
+        from tb_users
+        where
+        username = #{username}
+    </select>
 </mapper>

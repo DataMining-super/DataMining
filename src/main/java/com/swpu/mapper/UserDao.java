@@ -23,5 +23,9 @@ public interface UserDao {
      * @param user
      * @return
      */
-    int registerUser(Users user);
+    int insertByUser(Users user);
+
+    Users queryByUsername(Users user);
+
+
 }

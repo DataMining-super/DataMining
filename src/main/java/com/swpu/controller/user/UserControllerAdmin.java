@@ -29,5 +29,14 @@ public class UserControllerAdmin {
 
         return "index";
     }
+    @RequestMapping(value = "/login")
+    public String showUserList(){
+        return "logintest";
+    }
+
+    @RequestMapping(value = "/register")
+    public String register(){
+        return "registertest";
+    }
 
 }

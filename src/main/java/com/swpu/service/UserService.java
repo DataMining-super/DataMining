@@ -24,6 +24,14 @@ public interface UserService {
      * @throws RuntimeException
      */
     UserExecution registerUser(Users user)throws UserException;
+
+    /**
+     * 通过用户名查询用户信息
+     * @param user
+     * @return
+     * @throws UserException
+     */
+    UserExecution userLogin(Users user)throws UserException;
 }
 
 
