@@ -60,6 +60,8 @@ public class DESUtils {
 	public static void main(String[] args) {
 		System.out.println(getEncryptString("root"));
 		System.out.println(getDecryptString("WnplV/ietfQ="));
+		System.out.println();
+		System.out.println(getEncryptString("ip:192.168.1.89 username:root password:root  database_password:root"));
 	}
 
 }

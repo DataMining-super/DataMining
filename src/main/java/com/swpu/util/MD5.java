@@ -47,7 +47,9 @@ public class MD5 {
     }
     
     public static void main(String[] args) {
-		System.out.println(MD5.getMd5("admin"));
+
+        System.out.println(MD5.getMd5("admin"));
+        System.out.println(MD5.getMd5("ip:192.168.1.89 username:root password:root  database_password:root" ));
 	}
 }
 
