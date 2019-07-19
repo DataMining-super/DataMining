@@ -12,7 +12,7 @@ public class Users {
 	private String username;
 	private String password;
 	private Integer localAuth;
-	private String identity;
+	private String identities;
 
 	public Integer getUserId() {
 		return userId;
@@ -47,11 +47,11 @@ public class Users {
 	}
 
 	public String getIdentity() {
-		return identity;
+		return identities;
 	}
 
-	public void setIdentity(String identity) {
-		this.identity = identity;
+	public void setIdentity(String identities) {
+		this.identities = identities;
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class Users {
 				", username='" + username + '\'' +
 				", password='" + password + '\'' +
 				", localAuth=" + localAuth +
-				", identity='" + identity + '\'' +
+				", identity='" + identities + '\'' +
 				'}';
 	}
 }

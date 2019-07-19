@@ -4,20 +4,13 @@ import java.security.MessageDigest;
 
 /**
  * 
- * @author     : bless<505629625@qq.com>
- * Create Time : 2011-2-21����09:36:48
+ * @author     : acehuang
+ * Create Time : 2019-7-19
  * Description : 
- *             MD5�����㷨
+ *
  */
 public class MD5 {
 
-   /**
-    * 
-    * Function  : ����ָ���ַ���
-    * @author   : bless<505629625@qq.com>
-    * @param s  : �����ܲ���
-    * @return   : ���ܺ�Ľ��
-    */
     public static final String getMd5(String s)
     {
         char hexDigits[] = {

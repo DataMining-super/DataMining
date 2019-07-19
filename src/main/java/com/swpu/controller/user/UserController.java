@@ -14,7 +14,4 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller()
 @RequestMapping(value = "/user",method = {RequestMethod.GET,RequestMethod.POST})
 public class UserController {
-
-
-
 }

@@ -6,6 +6,12 @@
 <!--public List<Users> showUserList();-->
 <mapper namespace="com.swpu.mapper.UserDao">
     <select id="showUserList" resultType="Users" >
-        select * from users
+        select * from tb_users
     </select>
+    <insert id="registerUser" useGeneratedKeys="true" keyProperty="userId" keyColumn="user_id" >
+        insert into
+        tb_users(user_id,username,password,local_auth,identities)
+        values
+        (#{userId},#{username},#{password},#{localAuth},#{identities})
+    </insert>
 </mapper>
