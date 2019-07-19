@@ -1,4 +1,4 @@
-package com.swpu.controller;
+package com.swpu.controller.user;
 
 
 import com.swpu.pojo.Users;
@@ -14,7 +14,7 @@ import java.util.List;
  * @author huang
  */
 @Controller
-public class UserController {
+public class UserControllerAdmin {
 
     @Autowired
     private UserService userService;
