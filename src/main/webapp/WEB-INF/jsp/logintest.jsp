@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<form action = "/user/userlogin" method="get">
+<form action = "/user/login" method="get">
     <input type="text" name="username"/>
     <input type="password" name="password"/>
     <input type="text" name="verifycode">

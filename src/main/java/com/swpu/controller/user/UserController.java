@@ -38,7 +38,7 @@ public class UserController {
      * @param request
      * @return
      */
-    @RequestMapping(value = "/userregister")
+    @RequestMapping(value = "/register")
     @ResponseBody
     private Map<String,Object> registerUser(HttpServletRequest request){
         Map<String,Object> modelMap = new HashMap<String,Object>();
@@ -77,7 +77,7 @@ public class UserController {
     }
 
 
-    @RequestMapping(value = "/userlogin")
+    @RequestMapping(value = "/login")
     @ResponseBody
     private Map<String,Object> userLogin(HttpServletRequest request){
         Map<String,Object> modelMap = new HashMap<String,Object>();

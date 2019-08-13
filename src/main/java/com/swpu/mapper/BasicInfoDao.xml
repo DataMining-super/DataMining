@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.swpu.mapper.BasicInfoDao">
+
+
+    <!-- 信息的插入-->
+    <insert id="insertInfoBatch" parameterType="java.util.List" useGeneratedKeys="true" keyColumn="id">
+        insert into
+        basicinfo(
+        id,
+        device_name,
+        device_ip,
+        account,
+        terminal_ip,
+        terminalMAC,
+        aim_ip,
+        visit_website,
+        visit_url,
+        terminal_info,
+        visit_time,
+        source_port,
+        aim_port,
+        network_delay,
+        van
+        )
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{id,jdbcType=INTEGER},#{deviceName},#{deviceIp},#{account},#{terminalIp},#{terminalMAC},#{aimIp},#{visitWebsite},#{visitUrl},
+            #{terminalInfo},#{visitTime,#{sourcePort},#{aimPort},#{networkDelay},#{van})
+        </foreach>
+    </insert>
+
+</mapper>

@@ -16,17 +16,8 @@ import java.util.List;
 @Controller
 public class UserControllerAdmin {
 
-    @Autowired
-    private UserService userService;
-
-
-    @RequestMapping(value = "/")
+    @RequestMapping(value = "/index")
     public String showUserList(Model model){
-
-        List<Users> users = userService.showUserList();
-
-        model.addAttribute("users",users);
-
         return "index";
     }
     @RequestMapping(value = "/login")
@@ -38,5 +29,6 @@ public class UserControllerAdmin {
     public String register(){
         return "registertest";
     }
+
 
 }

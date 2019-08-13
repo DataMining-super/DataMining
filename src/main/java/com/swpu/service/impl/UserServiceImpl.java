@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
             Users resultUser = userDao.queryByUsername(user);
             if(resultUser != null){
                 String passwordActual = DESUtils.getEncryptString(user.getPassword());
-                if(resultUser.getPassword()==passwordActual){
+                if(resultUser.getPassword().equals(passwordActual)){
                     return new UserExecution(UserStateEnum.LOGIN_SUCCESS,resultUser);
                 }
                 return new UserExecution(UserStateEnum.LOGIN_ERROR);
