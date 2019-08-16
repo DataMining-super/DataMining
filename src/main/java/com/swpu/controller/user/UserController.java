@@ -76,7 +76,12 @@ public class UserController {
         return modelMap;
     }
 
-
+    /**
+     * 更改密码
+     * @param request
+     * @param newPassword
+     * @return
+     */
     @RequestMapping(value = "/updatePassword")
     @ResponseBody
     private Map<String, Object> updatePassword(HttpServletRequest request, String newPassword) {
