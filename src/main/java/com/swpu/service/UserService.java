@@ -1,6 +1,7 @@
 package com.swpu.service;
 
 import com.swpu.dto.UserExecution;
+import com.swpu.dto.VisitorExecution;
 import com.swpu.exeception.UserException;
 import com.swpu.pojo.Users;
 

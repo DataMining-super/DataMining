@@ -7,22 +7,22 @@
 
 <mapper namespace="com.swpu.mapper.UserDao">
     <select id="showUserList" resultType="Users" >
-        select * from tb_users
+        select * from tb_user
     </select>
 
     <!-- 注册用户的信息 -->
     <insert id="insertByUser" useGeneratedKeys="true" keyProperty="userId" keyColumn="user_id" >
         insert into
-        tb_users(user_id,username,password,local_auth,identities)
+        tb_user(user_id,username,password,local_auth)
         values
-        (#{userId},#{username},#{password},#{localAuth},#{identities})
+        (#{userId},#{username},#{password},#{localAuth})
     </insert>
 
     <!-- 用户登陆-->
     <select id="queryByUsername" resultType="Users">
         select
-        user_id,username,password,local_auth,identities
-        from tb_users
+        user_id,username,password,local_auth
+        from tb_user
         where
         username = #{username}
     </select>

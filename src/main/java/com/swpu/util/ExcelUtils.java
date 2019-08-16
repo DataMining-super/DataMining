@@ -57,13 +57,14 @@ public class ExcelUtils {
                 for (int j = 0; j < sheet.getLastRowNum() ; j++) {
                     String rowContent = "";
                     row = sheet.getRow(j);//读取一行
-                    if(row == null || row.getFirstCellNum() == j)
+                    if(row == null){
                         continue;
+                    }
                     for (int k = 1; k < row.getLastCellNum() ; k++) {
                         cell = row.getCell(k);
                         if(cell == null)
                             cell.setCellValue("");
-                        rowContent += cell.toString()+" " + ",";
+                        rowContent += this.getValue(cell)+" " + "&&&";
                     }
 
                     try{
@@ -123,7 +124,7 @@ public class ExcelUtils {
                 if (HSSFDateUtil.isCellDateFormatted(cell)) {
                     //如果是date类型则 ，获取该cell的date值
                     Date date = HSSFDateUtil.getJavaDate(cell.getNumericCellValue());
-                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm");
                     value = format.format(date);;
                 }else {// 纯数字
                     BigDecimal big=new BigDecimal(cell.getNumericCellValue());

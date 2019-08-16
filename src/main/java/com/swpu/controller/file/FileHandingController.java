@@ -3,10 +3,15 @@ package com.swpu.controller.file;
 import com.swpu.service.BasicInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 描述:
@@ -23,8 +28,16 @@ public class FileHandingController {
     private BasicInfoService basicInfoService;
 
     @RequestMapping(value = "/upload")
-    private void uploadExcel(HttpServletRequest request, HttpServletResponse response){
-        basicInfoService.uploadExcel(request, response);
+    @ResponseBody
+    private Map<String,Object> uploadExcel(HttpServletRequest request, HttpServletResponse response){
+        Map<String,Object> modelMap = new HashMap<>();
+        try{
+            basicInfoService.uploadExcel(request, response);
+            modelMap.put("success",true);
+        }catch (Exception e){
+            modelMap.put("success",false);
+        }
+        return modelMap;
     }
 
 

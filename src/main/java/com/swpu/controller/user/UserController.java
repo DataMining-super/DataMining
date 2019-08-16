@@ -53,18 +53,22 @@ public class UserController {
 
                     //增加成功的modelmap信息
                     modelMap.put("success",true);
+                    modelMap.put("message","注册成功");
                     return modelMap;
                 }else if(userException.getState() == UserStateEnum.REGISTER_ERROR.getState()){
                     //用户名存在的相关信息
                     modelMap.put("success",false);
+                    modelMap.put("message","用户已存在");
                 }else{
 
                     //增加失败的modelmap信息
                     modelMap.put("success",false);
+                    modelMap.put("message","注册失败");
                 }
 
             } catch (UserException e) {
                 modelMap.put("success",false);
+                modelMap.put("message","注册失败");
                 e.printStackTrace();
             }finally {
                 return modelMap;
@@ -73,6 +77,7 @@ public class UserController {
         }
         //验证码错误
         modelMap.put("success",false);
+        modelMap.put("message","注册失败");
         return modelMap;
     }
 
@@ -89,27 +94,32 @@ public class UserController {
                 UserExecution userException = userService.userLogin(user);
                 if(userException.getState() == UserStateEnum.LOGIN_SUCCESS.getState()){
                     Users currentUser = new Users();
-                    currentUser.setIdentity(user.getIdentity());
+                    currentUser.setLocalAuth(user.getLocalAuth());
                     request.getSession().setAttribute("currentUser",currentUser);
                     //增加成功的modelmap信息
                     modelMap.put("success",true);
+                    modelMap.put("message","登陆成功");
                     return modelMap;
                 }else if(userException.getState() == UserStateEnum.LOGIN_ERROR.getState()){
                     //密码错误
                     modelMap.put("success",false);
+                    modelMap.put("message","密码错误");
                 }else{
                     //信息为空
                     modelMap.put("success",false);
+                    modelMap.put("message","信息为空");
                 }
                 //增加失败的modelmap信息
             } catch (UserException e) {
                 modelMap.put("success",false);
+                modelMap.put("message","登陆失败");
                 e.printStackTrace();
             }
             return modelMap;
         }
         //验证码错误
         modelMap.put("success",false);
+        modelMap.put("message","验证码错误");
         return modelMap;
     }
 
