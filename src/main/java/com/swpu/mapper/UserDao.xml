@@ -26,4 +26,9 @@
         where
         username = #{username}
     </select>
+
+    <update id="updateUserPassword" >
+        update tb_users SET password=#{newPassword}
+        WHERE user_id=#{userId}
+    </update>
 </mapper>

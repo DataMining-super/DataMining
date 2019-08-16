@@ -33,6 +33,8 @@ public interface UserService {
      * @throws UserException
      */
     UserExecution userLogin(Users user)throws UserException;
+
+    boolean changeUserPassword(Users user, String password);
 }
 
 

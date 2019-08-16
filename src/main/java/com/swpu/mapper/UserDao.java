@@ -14,7 +14,6 @@ public interface UserDao {
      * 查询users
      * @return 用户列表
      */
-
     List<Users> showUserList();//test
 
 
@@ -25,7 +24,18 @@ public interface UserDao {
      */
     int insertByUser(Users user);
 
+    /**
+     * 查询用户功能
+     * @param user
+     * @return
+     */
     Users queryByUsername(Users user);
 
+    /**
+     * 用户改密码
+     * @param user
+     * @return
+     */
+    boolean updateUserPassword(Users user, String  newPassword);
 
 }

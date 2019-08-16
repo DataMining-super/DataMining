@@ -62,7 +62,7 @@ public class UserController {
                 }else{
 
                     //增加失败的modelmap信息
-                    modelMap.put("success",false);
+                    modelMap.put("success", false);
                     modelMap.put("message","注册失败");
                 }
 
@@ -75,6 +75,37 @@ public class UserController {
             }
 
         }
+        //验证码错误
+        modelMap.put("success", false);
+        return modelMap;
+    }
+
+    /**
+         * 更改密码
+         * @param request
+         * @param newPassword
+         * @return
+         */
+        @RequestMapping(value = "/updatePassword")
+        @ResponseBody
+        private Map<String, Object> updatePassword(HttpServletRequest request, String newPassword) {
+            Map<String, Object> modelMap = new HashMap<>();
+            if (CodeUtils.checkVerifyCode(request)) {
+                Users user = new Users();
+                String md5password = DESUtils.getEncryptString(HttpServletRequestUtil.getString(request, "password"));
+                user.setPassword(md5password);
+                user.setUsername(HttpServletRequestUtil.getString(request, "username"));
+                boolean result = userService.changeUserPassword(user, newPassword);
+                if (result) {
+                    //增加成功的modelMap信息
+                    modelMap.put("success", true);
+                    return modelMap;
+                } else {
+                    //增加失败的modelMap信息
+                    modelMap.put("success", false);
+                }
+
+            }
         //验证码错误
         modelMap.put("success",false);
         modelMap.put("message","注册失败");

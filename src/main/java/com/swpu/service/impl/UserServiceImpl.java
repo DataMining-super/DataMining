@@ -78,4 +78,21 @@ public class UserServiceImpl implements UserService {
         }
         return new UserExecution(UserStateEnum.NULL_INFO);
     }
+
+
+    /**
+     * 修改密码
+     *
+     * @param user
+     * @param newPassword
+     * @return
+     */
+    @Override
+    public boolean changeUserPassword(Users user, String newPassword) {
+        if (user != null && user.getUserId() != null && user.getPassword() != null) {
+            return userDao.updateUserPassword(user, newPassword);
+        } else {
+            return false;
+        }
+    }
 }
