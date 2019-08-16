@@ -1,10 +1,12 @@
 package com.swpu.pojo;
 
 
+import java.io.Serializable;
+
 /**
  * @author huang
  */
-public class Users {
+public class Users implements Serializable {
 	/**
 	 * 
 	 */
@@ -12,7 +14,7 @@ public class Users {
 	private String username;
 	private String password;
 	private Integer localAuth;
-	private String identities;
+
 
 	public Integer getUserId() {
 		return userId;
@@ -46,13 +48,6 @@ public class Users {
 		this.localAuth = localAuth;
 	}
 
-	public String getIdentity() {
-		return identities;
-	}
-
-	public void setIdentity(String identities) {
-		this.identities = identities;
-	}
 
 	@Override
 	public String toString() {
@@ -61,7 +56,6 @@ public class Users {
 				", username='" + username + '\'' +
 				", password='" + password + '\'' +
 				", localAuth=" + localAuth +
-				", identity='" + identities + '\'' +
 				'}';
 	}
 }

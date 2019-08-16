@@ -6,30 +6,87 @@
 
 
     <!-- 信息的插入-->
-    <insert id="insertInfoBatch" parameterType="java.util.List" useGeneratedKeys="true" keyColumn="id">
-        insert into
-        basicinfo(
-        id,
-        device_name,
-        device_ip,
-        account,
-        terminal_ip,
-        terminalMAC,
-        aim_ip,
-        visit_website,
-        visit_url,
-        terminal_info,
-        visit_time,
-        source_port,
-        aim_port,
-        network_delay,
-        van
-        )
-        values
-        <foreach collection="list" item="item" index="index" separator=",">
-            (#{id,jdbcType=INTEGER},#{deviceName},#{deviceIp},#{account},#{terminalIp},#{terminalMAC},#{aimIp},#{visitWebsite},#{visitUrl},
-            #{terminalInfo},#{visitTime,#{sourcePort},#{aimPort},#{networkDelay},#{van})
-        </foreach>
-    </insert>
+    <!--<insert id="insertInfoBatch" parameterType="java.util.List" useGeneratedKeys="true" keyColumn="id">-->
+        <!--insert into-->
+        <!--basicinfo(-->
+        <!--id,-->
+        <!--device_name,-->
+        <!--device_ip,-->
+        <!--account,-->
+        <!--terminal_ip,-->
+        <!--terminalMAC,-->
+        <!--aim_ip,-->
+        <!--visit_website,-->
+        <!--visit_url,-->
+        <!--terminal_info,-->
+        <!--visit_time,-->
+        <!--source_port,-->
+        <!--aim_port,-->
+        <!--network_delay,-->
+        <!--van-->
+        <!--)-->
+        <!--values-->
+        <!--<foreach collection="list" item="item" index="index" separator=",">-->
+            <!--(#{id,jdbcType=INTEGER},#{deviceName},#{deviceIp},#{account},#{terminalIp},#{terminalMAC},#{aimIp},#{visitWebsite},#{visitUrl},-->
+            <!--#{terminalInfo},#{visitTime,#{sourcePort},#{aimPort},#{networkDelay},#{van})-->
+        <!--</foreach>-->
+    <!--</insert>-->
 
+
+    <select id="queryArea" resultMap="areaMap">
+        select  * from
+        tb_affiliation
+        order by
+        (counts+0)
+        desc
+        limit
+        0,10;
+    </select>
+    <resultMap id="areaMap" type="com.swpu.pojo.Area">
+
+    </resultMap>
+
+    <select id="invaderInfo" resultMap="visitorMap">
+        select * from
+        tb_visitorinfo
+        order by
+        (counts+0)
+        desc
+        limit
+        0,10;
+    </select>
+    <resultMap id="visitorMap" type="com.swpu.pojo.Visitor">
+
+    </resultMap>
+
+    <select id="queryDataCount" resultType="long">
+        select count(1) from tb_basicinfo
+    </select>
+
+    <select id="queryDataList" resultMap="dataMap">
+          select
+           basic_id,
+           invade_location,
+           vositor_ip,
+           affiliation,
+           detail,
+           invade_time,
+           note,
+           inva_method
+           from
+          tb_basicinfo
+          limit
+          #{rowIndex},#{pageSize};
+    </select>
+
+    <resultMap id="dataMap" type="com.swpu.pojo.BasicData">
+        <id column="basic_id" property="basicId"/>
+        <result column="invade_location" property="invadeLocation"/>
+        <result column="visitor_ip" property="visitorIp"/>
+        <result column="affiliation" property="affiliation"/>
+        <result column="detail" property="detail"/>
+        <result column="invade_time" property="invadeTime"/>
+        <result column="note" property="note"/>
+        <result column="inva_method" property="invaMethod"/>
+    </resultMap>
 </mapper>

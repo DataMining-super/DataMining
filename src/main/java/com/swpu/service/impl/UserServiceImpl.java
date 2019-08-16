@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
         try {
             Users resultUser = userDao.queryByUsername(user);
             if(resultUser == null){
-                user.setIdentity("普通管理员");//0 普通管理员 1 超级管理员
+                //0 普通管理员 1 超级管理员
                 user.setLocalAuth(0);
                 //判断影响的结果行数
                 int effectNum = userDao.insertByUser(user);
