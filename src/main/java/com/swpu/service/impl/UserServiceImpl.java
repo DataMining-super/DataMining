@@ -7,7 +7,6 @@ import com.swpu.mapper.UserDao;
 import com.swpu.pojo.Users;
 import com.swpu.service.UserService;
 import com.swpu.util.DESUtils;
-import com.swpu.util.MD5;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +20,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserDao userDao ;
+    private UserDao userDao;
 
     @Override
     public List<Users> showUserList() {
@@ -36,7 +35,7 @@ public class UserServiceImpl implements UserService {
         }
         try {
             Users resultUser = userDao.queryByUsername(user);
-            if(resultUser == null){
+            if (resultUser == null) {
                 user.setIdentity("普通管理员");//0 普通管理员 1 超级管理员
                 user.setLocalAuth(0);
                 //判断影响的结果行数
@@ -50,7 +49,7 @@ public class UserServiceImpl implements UserService {
             }
         } catch (UserException e) {
             throw new UserException("用户信息插入失败");
-        }finally {
+        } finally {
             return new UserExecution(UserStateEnum.REGISTER_ERROR);
         }
 
@@ -58,6 +57,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 登陆验证
+     *
      * @param user
      * @return
      * @throws UserException
@@ -65,17 +65,34 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserExecution userLogin(Users user) throws UserException {
 
-        if(user != null&&user.getUsername()!=null&&user.getPassword()!=null){
+        if (user != null && user.getUsername() != null && user.getPassword() != null) {
             Users resultUser = userDao.queryByUsername(user);
-            if(resultUser != null){
+            if (resultUser != null) {
                 String passwordActual = DESUtils.getEncryptString(user.getPassword());
-                if(resultUser.getPassword().equals(passwordActual)){
-                    return new UserExecution(UserStateEnum.LOGIN_SUCCESS,resultUser);
+                if (resultUser.getPassword().equals(passwordActual)) {
+                    return new UserExecution(UserStateEnum.LOGIN_SUCCESS, resultUser);
                 }
                 return new UserExecution(UserStateEnum.LOGIN_ERROR);
             }
 
         }
         return new UserExecution(UserStateEnum.NULL_INFO);
+    }
+
+
+    /**
+     * 修改密码
+     *
+     * @param user
+     * @param newPassword
+     * @return
+     */
+    @Override
+    public boolean changeUserPassword(Users user, String newPassword) {
+        if (user != null && user.getUserId() != null && user.getPassword() != null) {
+            return userDao.updateUserPassword(user, newPassword);
+        } else {
+            return false;
+        }
     }
 }
