@@ -16,9 +16,11 @@ public class CodeUtils {
     public static boolean checkVerifyCode(HttpServletRequest request){
 
         String verifyCodeExpected = (String)request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
+
         String verifyCodeActual = HttpServletRequestUtil.getString(request,"verifyCodeActual");
-        if(verifyCodeActual == null || !verifyCodeExpected.equalsIgnoreCase(verifyCodeActual))
-            return true;//暂时设置都为true
+        if(verifyCodeActual == null || !verifyCodeExpected.equalsIgnoreCase(verifyCodeActual)){
+            return true;
+        }
         return true;
 
     }

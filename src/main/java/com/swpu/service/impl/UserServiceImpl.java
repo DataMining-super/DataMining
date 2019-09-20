@@ -35,23 +35,27 @@ public class UserServiceImpl implements UserService {
             return new UserExecution(UserStateEnum.NULL_INFO);
         }
         try {
-            Users resultUser = userDao.queryByUsername(user);
-            if(resultUser == null){
-                //0 普通管理员 1 超级管理员
-                user.setLocalAuth(0);
-                //判断影响的结果行数
-                int effectNum = userDao.insertByUser(user);
-                if (effectNum <= 0) {
-                    throw new UserException("用户信息插入失败");
-
-                } else {
-                    return new UserExecution(UserStateEnum.REGISTER_SUCCESS, user);
+            List<Users> users = userDao.showUserList();
+            if(users != null && users.size() > 0){
+                for (Users e:users
+                     ) {
+                    if (e.getUsername().equals(user.getUsername())){
+                        return new UserExecution(UserStateEnum.REGISTER_ERROR);
+                    }
                 }
+            }
+            //0 普通管理员 1 超级管理员
+            user.setLocalAuth(0);
+            //判断影响的结果行数
+            int effectNum = userDao.insertByUser(user);
+            if (effectNum <= 0) {
+                throw new UserException("用户信息插入失败");
+
+            } else {
+                return new UserExecution(UserStateEnum.REGISTER_SUCCESS, user);
             }
         } catch (UserException e) {
             throw new UserException("用户信息插入失败");
-        }finally {
-            return new UserExecution(UserStateEnum.REGISTER_ERROR);
         }
 
     }

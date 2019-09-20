@@ -22,7 +22,7 @@ public class UserDaoTest extends BasicTest{
     public void testUserLogin(){
 
         Users user = new Users();
-        user.setUsername("test");
+        user.setUsername("abc");
         Users currentUser = userDao.queryByUsername(user);
         System.out.println(currentUser.toString());
     }

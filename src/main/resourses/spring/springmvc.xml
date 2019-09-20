@@ -13,6 +13,8 @@
 	<!--默认配置过期-->
 	<mvc:annotation-driven />
 
+	<mvc:resources mapping="/static/**" location="/static/"/>
+
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />

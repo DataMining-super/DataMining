@@ -31,4 +31,39 @@ public class UserControllerAdmin {
     }
 
 
+    //后加
+    @RequestMapping(value = "/contentupload")
+    public String contentUpload(){
+        return "content-upload";
+    }
+
+    //后加
+    @RequestMapping(value = "/contenthistogram")
+    public String contentHistogram(){
+        return "content-histogram";
+    }
+
+    //后加
+    @RequestMapping(value = "/contentbar")
+    public String contentBar(){
+        return "content-bar";
+    }
+
+    //后加
+    @RequestMapping(value = "/contenttable")
+    public String contentTable(){
+        return "content-table";
+    }
+
+    //后加
+    @RequestMapping(value = "/contentgrid")
+    public String contentGrid(){
+        return "content-grid";
+    }
+
+
+
+
+
+
 }

@@ -43,37 +43,45 @@ public class UserController {
     private Map<String,Object> registerUser(HttpServletRequest request){
         Map<String,Object> modelMap = new HashMap<String,Object>();
         if ((Boolean) CodeUtils.checkVerifyCode(request)){
+
             Users user = new Users();
             String md5password = DESUtils.getEncryptString(HttpServletRequestUtil.getString(request,"password"));
-            user.setPassword(md5password);
-            user.setUsername(HttpServletRequestUtil.getString(request,"username"));
-            try {
-                UserExecution userException = userService.registerUser(user);
-                if(userException.getState() == UserStateEnum.REGISTER_SUCCESS.getState()){
-
-                    //增加成功的modelmap信息
-                    modelMap.put("success",true);
-                    modelMap.put("message","注册成功");
-                    return modelMap;
-                }else if(userException.getState() == UserStateEnum.REGISTER_ERROR.getState()){
-                    //用户名存在的相关信息
-                    modelMap.put("success",false);
-                    modelMap.put("message","用户已存在");
-                }else{
-
-                    //增加失败的modelmap信息
-                    modelMap.put("success", false);
-                    modelMap.put("message","注册失败");
-                }
-
-            } catch (UserException e) {
-                modelMap.put("success",false);
-                modelMap.put("message","注册失败");
-                e.printStackTrace();
-            }finally {
+            String checkmd5password = DESUtils.getEncryptString(HttpServletRequestUtil.getString(request,"checkpassword"));
+            String username = HttpServletRequestUtil.getString(request,"username");
+            if (md5password == null || md5password.length() == 0 || username==null || username.length() == 0 || checkmd5password == null || checkmd5password.length() == 0){
+                modelMap.put("success", false);
                 return modelMap;
             }
+            if (md5password.equals(checkmd5password)){
+                user.setPassword(md5password);
+                user.setUsername(username);
+                try {
+                    UserExecution userException = userService.registerUser(user);
+                    if(userException.getState() == UserStateEnum.REGISTER_SUCCESS.getState()){
 
+                        //增加成功的modelmap信息
+                        modelMap.put("success",true);
+                        modelMap.put("message","注册成功");
+                        return modelMap;
+                    }else if(userException.getState() == UserStateEnum.REGISTER_ERROR.getState()){
+                        //用户名存在的相关信息
+                        modelMap.put("success",false);
+                        modelMap.put("message","用户已存在");
+                    }else{
+
+                        //增加失败的modelmap信息
+                        modelMap.put("success", false);
+                        modelMap.put("message","注册失败");
+                    }
+
+                } catch (UserException e) {
+                    modelMap.put("success",false);
+                    modelMap.put("message","注册失败");
+                    e.printStackTrace();
+                }finally {
+                    return modelMap;
+                }
+            }
         }
         //验证码错误
         modelMap.put("success", false);
@@ -93,8 +101,13 @@ public class UserController {
             if (CodeUtils.checkVerifyCode(request)) {
                 Users user = new Users();
                 String md5password = DESUtils.getEncryptString(HttpServletRequestUtil.getString(request, "password"));
+                String username = HttpServletRequestUtil.getString(request, "username");
+                if (md5password == null || md5password.length() == 0 || username==null || username.length() == 0){
+                    modelMap.put("success", false);
+                    return modelMap;
+                }
                 user.setPassword(md5password);
-                user.setUsername(HttpServletRequestUtil.getString(request, "username"));
+                user.setUsername(username);
                 boolean result = userService.changeUserPassword(user, newPassword);
                 if (result) {
                     //增加成功的modelMap信息
