@@ -1,0 +1,47 @@
+img {border: none;}
+a {
+    text-decoration:none;
+    color: #040302;
+}
+.container_proess {
+    width: 960px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.content_proess{
+    width:278px;
+    margin:0;
+    position:relative;
+    float:left;
+    font-size:12px;
+    line-height:2em;
+    padding:30px 0 30px;
+}
+/*进度条的宽度*/
+.col_proess { width:280px; }
+#skill {
+    list-style:none;
+    padding-top:30px;
+}
+#skill li {
+    margin-bottom:70px;
+    /*	进度条的背景色*/
+    background: #ffffff;
+    height:16px;
+    border-radius:0px;
+}
+#skill li em {
+    position:relative;
+    top:-30px;
+}
+.expand {
+    height:1px;
+    margin:2px 0;
+    /*背景线的颜色*/
+    background: #a09aa3;
+    position:absolute;
+    box-shadow:0px 0px 10px 1px #a09aa3;
+}
+.html5       { width:79%;  -moz-animation:html5 2s ease-out;       -webkit-animation:html5 2s ease-out;  border: #a09aa3 8px  solid   }
+@-moz-keyframes html5       { 0%  { width:0px;} 100%{ width:79%;}  }
+@-webkit-keyframes html5       { 0%  { width:0px;} 100%{ width:79%;}  }

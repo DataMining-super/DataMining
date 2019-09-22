@@ -140,13 +140,23 @@
             url: "/user/register" ,
             data: $('#form_rigster').serialize(),
             success: function (result) {
+                // console.log(result);//打印服务端返回的数据(调试用)
+                // if (result.resultCode == 200) {
+                //     console.log("SUCCESS");
+                //     $(location).attr("href", "/login");
+                // }else{
+                //     alert("注册失败");
+                // }
                 console.log(result);//打印服务端返回的数据(调试用)
-                if (result.resultCode == 200) {
-                    console.log("SUCCESS");
-                    $(location).attr("href", "/login");
-                }else{
-                    alert("注册失败");
+                if (result.success) {
+                    alert("注册成功");
+                    window.location.href='/login';
                 }
+                ;
+            },
+            error : function() {
+                alert("注册失败");
+                window.location.href='/register';
             }
         });
     });
