@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.swpu.mapper.UploadDao">
+
+    <!--    void addUpload(int userId, String fileName);-->
+    <select id="addUpload">
+        insert into tb_upload(user_id,file_name) values(#{userId},#{fileName});
+    </select>
+
+    <!--    void queryUpload(int userId);-->
+    <select id="queryUpload" resultMap="uploadMapper">
+        select * from tb_upload where user_id=#{userId};
+    </select>
+    
+    <resultMap id="uploadMapper" type="com.swpu.pojo.UploadMapping">
+        <result column="upload_id" property="uploadId" />
+        <result column="user_id" property="userId" />
+        <result column="file_name" property="fileName" />
+    </resultMap>
+</mapper>

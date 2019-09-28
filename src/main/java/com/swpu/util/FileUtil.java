@@ -8,11 +8,20 @@ import java.util.Random;
 
 public class FileUtil {
 	private static String seperator = System.getProperty("file.separator");
-	private static final SimpleDateFormat sDateFormat = new SimpleDateFormat(
-			"yyyyMMddHHmmss"); // 时间格式化的格式
+	/**
+	 * 	时间格式化的格式
+ 	 */
+	private static final SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 	private static final Random r = new Random();
 
-	//根据系统属性创建目录
+	public static final String sh = "python /Users/huang/PycharmProjects/project2/src/huang/db/add.py ";
+
+    public static String getAbsolutePath(String originalFilename) {
+
+        return null;
+    }
+
+    //根据系统属性创建目录
 	public static String getBasePath() {
 		String os = System.getProperty("os.name");
 		String basePath = "";

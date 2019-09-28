@@ -34,7 +34,7 @@
 
 
     <select id="queryArea" resultMap="areaMap">
-        select  * from
+        select * from
         tb_affiliation
         order by
         (counts+0)
@@ -80,11 +80,16 @@
     </select>
 
     <!--    int queryDateCount(int month, int day);-->
-    <select id="queryDateCount" resultType="int" parameterType="int">
-        select count(*) from tb_basicinfo
-        where month(invade_time) = #{month}
-        and day(invade_time) = #{day}
+    <select id="queryDateCount" resultMap="dateMapping" parameterType="int">
+        select day(invade_time) as daytime, count(day(invade_time)) as counts from tb_basicinfo
+        where month(invade_time)=#{month} and year(invade_time)=#{year}
+        group by day(invade_time)
     </select>
+
+    <resultMap id="dateMapping" type="com.swpu.pojo.DateMapping">
+        <result column="daytime" property="day"/>
+        <result column="counts" property="count"/>
+    </resultMap>
 
     <resultMap id="dataMap" type="com.swpu.pojo.BasicData">
         <id column="basic_id" property="basicId"/>

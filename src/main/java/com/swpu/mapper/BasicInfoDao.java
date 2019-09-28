@@ -3,6 +3,7 @@ package com.swpu.mapper;
 
 import com.swpu.pojo.Area;
 import com.swpu.pojo.BasicData;
+import com.swpu.pojo.DateMapping;
 import com.swpu.pojo.Visitor;
 import org.apache.ibatis.annotations.Param;
 
@@ -48,5 +49,5 @@ public interface BasicInfoDao {
      * @param day 天
      * @return 攻击次数
      */
-    int queryDateCount(@Param("month") int month,@Param("day") int day);
+     List<DateMapping> queryDateCount(@Param("year")int year, @Param("month") int month);
 }

@@ -6,6 +6,7 @@ import com.swpu.dto.VisitorExecution;
 import com.swpu.enums.AreaStateEnum;
 import com.swpu.enums.DataStateEnum;
 import com.swpu.enums.VisitorStateEnum;
+import com.swpu.pojo.DateMapping;
 import com.swpu.service.BasicInfoService;
 import com.swpu.util.HttpServletRequestUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -99,17 +101,25 @@ public class DataController {
         return modelMap;
     }
 
-    @RequestMapping(value = "dateCount")
+    @RequestMapping(value = "dateCount", method = RequestMethod.GET)
     public Map<String, Object> dataCount(HttpServletRequest request, HttpServletResponse response) {
         Map<String, Object> modelMap = new HashMap<>();
 
-        int month = Integer.parseInt(request.getParameter("month"));
-        int day = Integer.parseInt(request.getParameter("day"));
+        int month;
+        int year;
+        try {
+            month = Integer.parseInt(request.getParameter("month"));
+            year = Integer.parseInt(request.getParameter("year"));
+        } catch (Exception e) {
+            modelMap.put("success", false);
+            modelMap.put("message", "缺失参数");
+            return modelMap;
+        }
 
-        int count = basicInfoService.dateCount(month, day);
+        List<DateMapping> dateMappings = basicInfoService.dateCount(year, month);
 
         modelMap.put("success", true);
-        modelMap.put("count", count);
+        modelMap.put("day_count", dateMappings);
         return modelMap;
     }
 

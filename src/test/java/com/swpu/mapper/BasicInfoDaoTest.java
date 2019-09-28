@@ -1,8 +1,11 @@
 package com.swpu.mapper;
 
+import com.swpu.pojo.DateMapping;
 import test.BasicTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -19,7 +22,7 @@ public class BasicInfoDaoTest extends BasicTest {
 
     @Test
     public void testQueryDateCount() {
-        int count = dao.queryDateCount(5, 31);
-        assertEquals(count, 17);
+        List<DateMapping> dateMappings = dao.queryDateCount(2018, 5);
+        System.out.println(dateMappings);
     }
 }

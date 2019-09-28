@@ -9,6 +9,7 @@ import com.swpu.enums.VisitorStateEnum;
 import com.swpu.mapper.BasicInfoDao;
 import com.swpu.pojo.Area;
 import com.swpu.pojo.BasicData;
+import com.swpu.pojo.DateMapping;
 import com.swpu.pojo.Visitor;
 import com.swpu.service.BasicInfoService;
 import com.swpu.util.ExcelUtils;
@@ -38,13 +39,9 @@ public class BasicInfoServiceImpl implements BasicInfoService {
     @Autowired
     private BasicInfoDao basicInfoDao;
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
-    public void uploadExcel(HttpServletRequest request, HttpServletResponse response) {
-
-        MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
-
-        MultipartFile file = multipartHttpServletRequest.getFile("file");
+    public void uploadExcel(MultipartFile file) {
 
         if(file.isEmpty()){
             try{
@@ -145,8 +142,8 @@ public class BasicInfoServiceImpl implements BasicInfoService {
     }
 
     @Override
-    public int dateCount(int month, int day) {
-        return basicInfoDao.queryDateCount(month, day);
+    public List<DateMapping> dateCount(int year, int month) {
+        return basicInfoDao.queryDateCount(year, month);
     }
 
 
