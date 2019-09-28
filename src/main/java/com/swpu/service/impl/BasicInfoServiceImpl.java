@@ -144,5 +144,10 @@ public class BasicInfoServiceImpl implements BasicInfoService {
         return areaExecution;
     }
 
+    @Override
+    public int dateCount(int month, int day) {
+        return basicInfoDao.queryDateCount(month, day);
+    }
+
 
 }

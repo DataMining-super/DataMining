@@ -1,9 +1,6 @@
 package test;
 
-import com.alibaba.druid.support.spring.stat.SpringStatUtils;
 import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 

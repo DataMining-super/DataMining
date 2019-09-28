@@ -79,6 +79,13 @@
           #{rowIndex},#{pageSize};
     </select>
 
+    <!--    int queryDateCount(int month, int day);-->
+    <select id="queryDateCount" resultType="int" parameterType="int">
+        select count(*) from tb_basicinfo
+        where month(invade_time) = #{month}
+        and day(invade_time) = #{day}
+    </select>
+
     <resultMap id="dataMap" type="com.swpu.pojo.BasicData">
         <id column="basic_id" property="basicId"/>
         <result column="invade_location" property="invadeLocation"/>

@@ -15,11 +15,13 @@ import javax.servlet.http.HttpServletResponse;
 public interface BasicInfoService {
 
 
-    public void uploadExcel(HttpServletRequest request,HttpServletResponse response);
+    void uploadExcel(HttpServletRequest request, HttpServletResponse response);
 
-    public DataExecution queryDataList(int pageIndex, int pageSize);
+    DataExecution queryDataList(int pageIndex, int pageSize);
 
     VisitorExecution queryTenRecord();
 
     AreaExecution queryArea();
+
+    int dateCount(int month, int day);
 }

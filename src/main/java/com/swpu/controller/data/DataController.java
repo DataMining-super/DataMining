@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.crypto.Data;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -97,6 +96,20 @@ public class DataController {
             modelMap.put("message", AreaStateEnum.QUERY_FAILD);
             e.printStackTrace();
         }
+        return modelMap;
+    }
+
+    @RequestMapping(value = "dateCount")
+    public Map<String, Object> dataCount(HttpServletRequest request, HttpServletResponse response) {
+        Map<String, Object> modelMap = new HashMap<>();
+
+        int month = Integer.parseInt(request.getParameter("month"));
+        int day = Integer.parseInt(request.getParameter("day"));
+
+        int count = basicInfoService.dateCount(month, day);
+
+        modelMap.put("success", true);
+        modelMap.put("count", count);
         return modelMap;
     }
 
