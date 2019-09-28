@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.swpu.mapper.MethodDao">
+
+    <!--        List<Method> queryMethod();-->
+    <select id="queryMethod" resultMap="methodMapper" resultType="java.util.List">
+        select inva_method, count(inva_method) as counts from tb_basicinfo GROUP BY inva_method;
+    </select>
+
+    <resultMap id="methodMapper" type="com.swpu.pojo.Method">
+        <result column="inva_method" property="mode" />
+        <result column="counts" property="count" />
+    </resultMap>
+
+</mapper>

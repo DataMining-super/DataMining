@@ -137,8 +137,9 @@ public class UserController {
             try {
                 UserExecution userException = userService.userLogin(user);
                 if(userException.getState() == UserStateEnum.LOGIN_SUCCESS.getState()){
+                    Users resultUser = userException.getUser();
                     Users currentUser = new Users();
-                    currentUser.setLocalAuth(user.getLocalAuth());
+                    currentUser.setUserId(resultUser.getUserId());
                     request.getSession().setAttribute("currentUser",currentUser);
                     //增加成功的modelmap信息
                     modelMap.put("success",true);

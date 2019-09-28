@@ -7,11 +7,14 @@ import com.swpu.enums.AreaStateEnum;
 import com.swpu.enums.DataStateEnum;
 import com.swpu.enums.VisitorStateEnum;
 import com.swpu.pojo.DateMapping;
+import com.swpu.pojo.Method;
 import com.swpu.service.BasicInfoService;
+import com.swpu.service.MethodService;
 import com.swpu.util.HttpServletRequestUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,6 +37,9 @@ public class DataController {
 
     @Autowired
     private BasicInfoService basicInfoService;
+
+    @Autowired
+    private MethodService methodService;
 
     @RequestMapping(value = "/querydatalist")
     public Map<String, Object> queryDataList(HttpServletRequest request, HttpServletResponse response) {
@@ -120,6 +126,22 @@ public class DataController {
 
         modelMap.put("success", true);
         modelMap.put("day_count", dateMappings);
+        return modelMap;
+    }
+
+    @RequestMapping(value = "methodCount", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> methodCount() {
+        Map<String, Object> modelMap = new HashMap<>();
+        List<Method> methods = null;
+        try {
+            methods = methodService.getMethods();
+        } catch (Exception e) {
+            e.printStackTrace();
+            modelMap.put("success", false);
+        }
+        modelMap.put("success", true);
+        modelMap.put("methods", methods);
         return modelMap;
     }
 

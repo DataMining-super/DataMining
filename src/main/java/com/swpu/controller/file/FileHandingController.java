@@ -57,16 +57,23 @@ public class FileHandingController {
             uploadService.addUpload(userId, filePath);
             modelMap.put("success",true);
         }catch (Exception e){
+            e.printStackTrace();
             modelMap.put("success",false);
         }
         return modelMap;
     }
 
     @RequestMapping("/queryUpload")
+    @ResponseBody
     public Map<String, Object> queryUpload(HttpServletRequest request) {
         Map<String, Object> modelMap = new HashMap<>();
         List<UploadMapping> uploadMapper;
         try {
+            // 测试用
+            Users user = new Users();
+            user.setUserId(1);
+            request.getSession().setAttribute("currentUser",user);
+
             Users currentUser = (Users) request.getSession().getAttribute("currentUser");
             Integer userId = currentUser.getUserId();
             uploadMapper = uploadService.queryUpload(userId);
