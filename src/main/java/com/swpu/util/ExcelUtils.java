@@ -35,35 +35,40 @@ public class ExcelUtils {
      * @param fileName
      * @return
      */
-    public void getBankListByExcel(InputStream in,String fileName) throws Exception {
+    public String getBankListByExcel(InputStream in,String fileName) throws Exception {
 
         //创建excel工作簿
         Workbook workbook = this.getWorkbook(in,fileName);
 
-        if(workbook == null)
+        if(workbook == null) {
             throw new Exception("创建workbook为空");
-        Sheet sheet = null;//记录页
-        Row row = null;
-        Cell cell = null;
-
+        }
+        //记录页
+        Sheet sheet;
+        Row row;
+        Cell cell;
+        String filepath = null;
         //获取文件的地址
         try{
-            String filepath = FileUtil.createFile();
+            filepath = FileUtil.createFile();
             //遍历所有的页数
             for (int i = 0; i < workbook.getNumberOfSheets() ; i++) {
                 sheet = workbook.getSheetAt(i);
-                if(sheet == null)
+                if(sheet == null) {
                     continue;
+                }
                 for (int j = 0; j < sheet.getLastRowNum() ; j++) {
                     String rowContent = "";
-                    row = sheet.getRow(j);//读取一行
+                    //读取一行
+                    row = sheet.getRow(j);
                     if(row == null){
                         continue;
                     }
                     for (int k = 1; k < row.getLastCellNum() ; k++) {
                         cell = row.getCell(k);
-                        if(cell == null)
+                        if(cell == null) {
                             cell.setCellValue("");
+                        }
                         rowContent += this.getValue(cell)+" " + "&&&";
                     }
 
@@ -79,6 +84,7 @@ public class ExcelUtils {
         }catch (Exception e){
             e.printStackTrace();
         }
+        return filepath;
     }
 
 

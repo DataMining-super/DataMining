@@ -40,24 +40,21 @@ public class FileHandingController {
 
     @RequestMapping(value = "/upload")
     @ResponseBody
-    private Map<String,Object> uploadExcel(HttpServletRequest request, HttpServletResponse response){
+    private Map<String,Object> uploadExcel(HttpServletRequest request){
         Map<String,Object> modelMap = new HashMap<>();
         MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
 
         MultipartFile file = multipartHttpServletRequest.getFile("file");
         try{
-            basicInfoService.uploadExcel(file);
-
-            //--------------------编辑shell命令， 获取文件绝对路径
-            String absoluteFilePath = file.getOriginalFilename();
-            String sh = FileUtil.sh + absoluteFilePath;
+            String filePath = basicInfoService.uploadExcel(file);
+            String sh = FileUtil.sh + filePath;
             // 系统调用 同步调用
             SystemCall.call(sh);
 
             // 保存上传记录
             Users currentUser = (Users) request.getSession().getAttribute("currentUser");
             Integer userId = currentUser.getUserId();
-            uploadService.addUpload(userId, absoluteFilePath);
+            uploadService.addUpload(userId, filePath);
             modelMap.put("success",true);
         }catch (Exception e){
             modelMap.put("success",false);

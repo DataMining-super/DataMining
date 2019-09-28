@@ -18,7 +18,7 @@ import java.util.List;
 public interface BasicInfoService {
 
 
-    void uploadExcel(MultipartFile file);
+    String uploadExcel(MultipartFile file);
 
     DataExecution queryDataList(int pageIndex, int pageSize);
 

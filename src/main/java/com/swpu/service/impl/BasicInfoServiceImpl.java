@@ -41,7 +41,7 @@ public class BasicInfoServiceImpl implements BasicInfoService {
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public void uploadExcel(MultipartFile file) {
+    public String uploadExcel(MultipartFile file) {
 
         if(file.isEmpty()){
             try{
@@ -57,11 +57,13 @@ public class BasicInfoServiceImpl implements BasicInfoService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        String filePath = null;
         try {
-            new ExcelUtils().getBankListByExcel(in,file.getOriginalFilename());
+            filePath = new ExcelUtils().getBankListByExcel(in, file.getOriginalFilename());
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return filePath;
     }
 
     /**
