@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface UploadService {
 
-    void addUpload(int userId, String fileName);
+    void addUpload(int userId, String fileName, String size);
 
     List<UploadMapping> queryUpload(int userId);
 

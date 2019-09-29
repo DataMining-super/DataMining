@@ -48,13 +48,14 @@ public class FileHandingController {
         try{
             String filePath = basicInfoService.uploadExcel(file);
             String sh = FileUtil.sh + filePath;
-            // 系统调用 同步调用
-            SystemCall.call(sh);
+            // 系统调用 异步调用
+            new Thread(() -> SystemCall.call(sh));
 
             // 保存上传记录
+            String size = String.valueOf(file.getSize() / 1024) + "KB";
             Users currentUser = (Users) request.getSession().getAttribute("currentUser");
             Integer userId = currentUser.getUserId();
-            uploadService.addUpload(userId, filePath);
+            uploadService.addUpload(userId, filePath, size);
             modelMap.put("success",true);
         }catch (Exception e){
             e.printStackTrace();

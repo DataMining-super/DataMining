@@ -20,7 +20,7 @@ public class UploadDaoTest extends BasicTest {
 
     @Test
     public void testAddUpload() {
-        dao.addUpload(1, "huang.txt");
+        dao.addUpload(1, "huang.txt", "50KB");
     }
 
     @Test

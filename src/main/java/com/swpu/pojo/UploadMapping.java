@@ -13,4 +13,6 @@ public class UploadMapping {
     private int uploadId;
     private int userId;
     private String fileName;
+    private boolean ready;
+    private String size;
 }

@@ -21,8 +21,8 @@ public class UploadServiceImpl implements UploadService {
     private UploadDao dao;
 
     @Override
-    public void addUpload(int userId, String fileName) {
-        dao.addUpload(userId, fileName);
+    public void addUpload(int userId, String fileName, String size) {
+        dao.addUpload(userId, fileName, size);
     }
 
     @Override
